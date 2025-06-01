@@ -27,7 +27,7 @@ button {
 @layer utilities {
   .glow-card {
     @apply rounded-2xl  shadow-lg transition-all duration-300 
-           hover:shadow-yellow-400/50 dark:hover:shadow-yellow-300/40 
+           hover:shadow-blue-400/50 dark:hover:shadow-blue-300/40 
            hover:scale-[1.03];
   }
 
