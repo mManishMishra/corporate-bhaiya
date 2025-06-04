@@ -13,6 +13,7 @@ import StoriesPage from "./pages/Stories";
 import { ErrorPage } from "./pages/ErrorPage";
 import Login from "./pages/Login";
 import UserProfile from "./pages/Profile";
+import ContactUs from "./pages/ContactUs";
 
 const App = () => {
   useTheme();
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/contact-us" element={<ContactUs />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />

@@ -109,14 +109,19 @@
 
 // src/pages/UserProfile.tsx
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import placeholder from "../assets/mentor2.jpg";
 import { motion } from "framer-motion";
 import EditProfileForm from "./EditProfile";
+import toast from "react-hot-toast";
+import { logout } from "../redux/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
   const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
 
   if (!user)
@@ -154,6 +159,16 @@ const UserProfile = () => {
             {role.toUpperCase()}
           </p>
         </div>
+        <button
+          onClick={() => {
+            dispatch(logout());
+            toast.success("Logged out 👋");
+            navigate("/");
+          }}
+          className="ml-auto px-4 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition"
+        >
+          Logout
+        </button>
         <button
           onClick={() => setIsEditing((prev) => !prev)}
           className="ml-auto px-4 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition"

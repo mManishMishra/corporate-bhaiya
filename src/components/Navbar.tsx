@@ -267,8 +267,11 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "About Us", path: "/about-us" },
-    { name: "Practice SQL", path: "/practice-sql" },
-    { name: "Book Mock Interview", path: "/book-mock-interview" },
+    { name: "Practice SQL", path: "https://corporatebhaiya.com/sql_bot" },
+    {
+      name: "Book Mock Interview",
+      path: "https://superprofile.bio/bookings/corporate-bhaiya",
+    },
     { name: "Contact Us", path: "/contact-us" },
   ];
 
