@@ -5,6 +5,7 @@ import OurPorgrams from "./OurPorgrams";
 import FlashCard from "../components/FlashCard";
 import OfferMarquee from "../components/OfferMarquee";
 import { useLimitedTimeOffer } from "../hooks/useLimitedTimeOffer";
+import OurMentor from "./OurMentor";
 
 const Home = () => {
   const { OfferMarquee, OfferCard, OfferModal } = useLimitedTimeOffer();
@@ -18,12 +19,11 @@ const Home = () => {
       {/* <OurImpact /> */}
       {/* <FlashCard /> */}
       {/* <OfferMarquee /> */}
+      <OurMentor />
       <SignUp />
-      <OfferMarquee />
-      <OfferModal />
-      <main className="mt-20">
-        <OfferCard />
-      </main>
+      {/* <OfferMarquee /> */}
+      {/* <OfferModal /> */}
+      <main className="mt-20">{/* <OfferCard /> */}</main>
       {/* <HeroSection /> */}
       {/* <FeaturedStory /> */}
     </>

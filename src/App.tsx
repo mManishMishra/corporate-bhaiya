@@ -11,6 +11,8 @@ import OurImpact from "./pages/OurImpact";
 import OurWork from "./pages/OurWork";
 import StoriesPage from "./pages/Stories";
 import { ErrorPage } from "./pages/ErrorPage";
+import Login from "./pages/Login";
+import UserProfile from "./pages/Profile";
 
 const App = () => {
   useTheme();
@@ -20,11 +22,9 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/about-us" element={<AboutUs />} /> */}
-          {/* <Route path="/our-impact" element={<OurImpact />} /> */}
-          {/* <Route path="/our-work" element={<OurWork />} /> */}
-          {/* <Route path="/stories" element={<StoriesPage />} /> */}
-          {/* <Route path="/heroes-gala" element={<HeroesGala />} /> */}
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />
