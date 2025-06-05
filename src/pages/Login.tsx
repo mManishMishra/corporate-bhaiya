@@ -226,10 +226,10 @@ const Login = () => {
               Admin – <strong>admin@admin.com / admin</strong>
             </li>
             <li>
-              Mentor – <strong>mentor@byte.com / mentor123</strong>
+              Mentor – <strong>mentor@mentor.com / mentor</strong>
             </li>
             <li>
-              Student – <strong>student@byte.com / student123</strong>
+              Student – <strong>student@student.com / student</strong>
             </li>
           </ul>
         </div>
