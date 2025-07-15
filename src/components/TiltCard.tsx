@@ -70,7 +70,7 @@ export const TiltCard = ({ card }: TiltCardProps) => {
         <p className="text-gray-600 dark:text-gray-300 mb-4">{card.text}</p>
         {card.route !== "" && (
           <button
-            onClick={() => navigate(card.route)}
+            onClick={() => navigate(card.route || "")}
             className="flex items-center gap-2 text-orange-600 dark:text-orange-400 font-semibold hover:underline group-hover:translate-x-1 transition-transform duration-300 cursor-pointer"
           >
             {card.buttonText} <ArrowRight size={20} />

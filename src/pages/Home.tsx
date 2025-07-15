@@ -2,14 +2,12 @@ import Slider from "../components/Slider";
 // import FeaturedStory from "./FeaturedStory";
 import SignUp from "./Signup";
 import OurPorgrams from "./OurPorgrams";
-import FlashCard from "../components/FlashCard";
-import OfferMarquee from "../components/OfferMarquee";
 import { useLimitedTimeOffer } from "../hooks/useLimitedTimeOffer";
 import OurMentor from "./OurMentor";
 import ContactUs from "./ContactUs";
 
 const Home = () => {
-  const { OfferMarquee, OfferCard, OfferModal } = useLimitedTimeOffer();
+  const { OfferMarquee, OfferCard } = useLimitedTimeOffer();
 
   return (
     <>

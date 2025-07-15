@@ -156,7 +156,7 @@ const UserProfile = () => {
             {name}
           </h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {role.toUpperCase()}
+            {role?.toUpperCase() || "69"}
           </p>
         </div>
         <button
@@ -195,7 +195,8 @@ const UserProfile = () => {
             <div>
               <h3 className="text-lg font-semibold mt-4">Courses Enrolled</h3>
               <ul className="list-disc ml-6 mt-2">
-                {coursesEnrolled?.length > 0 ? (
+                {Array.isArray(coursesEnrolled) &&
+                coursesEnrolled.length > 0 ? (
                   coursesEnrolled.map((course: string, idx: number) => (
                     <li key={idx}>{course}</li>
                   ))
@@ -219,7 +220,7 @@ const UserProfile = () => {
               <div className="mt-4">
                 <h3 className="text-lg font-semibold">Upcoming Schedules</h3>
                 <ul className="list-disc ml-6 mt-2">
-                  {schedules?.length > 0 ? (
+                  {Array.isArray(schedules) && schedules?.length > 0 ? (
                     schedules.map((item: string, idx: number) => (
                       <li key={idx}>{item}</li>
                     ))

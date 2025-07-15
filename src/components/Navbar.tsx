@@ -309,7 +309,7 @@ const Navbar = () => {
             <li>
               <Link to="/profile" className="flex items-center gap-2 hover-fx">
                 <img
-                  src={user?.avatar || defaultAvatar}
+                  src={user?.profilePic || defaultAvatar}
                   alt="User Avatar"
                   className="w-9 h-9 rounded-full object-cover border border-orange-500"
                 />

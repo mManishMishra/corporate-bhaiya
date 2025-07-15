@@ -1,4 +1,4 @@
-import { FeatureCards, MentorData, MentorGrid } from "../components/TiltCard"; // or wherever you keep it
+import { MentorData, MentorGrid } from "../components/TiltCard"; // or wherever you keep it
 import Paras from "../assets/paras_jain1.jpg";
 import Samyak from "../assets/samayak1.jpeg";
 import Anas from "../assets/anas.jpg";
@@ -94,7 +94,7 @@ const mentorData: MentorData[] = [
     name: "Manish Mishra",
     image: Manish,
     role: "Software Developer",
-    experience: "4+ years",
+    experience: "3+ years",
     company: "Bailiwick Tech Ex Mobility",
     linkedin: "https://www.linkedin.com/in/parasjain/",
     route: "/mentor/manish",

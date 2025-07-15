@@ -97,7 +97,7 @@ import { login } from "../redux/slices/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
-import DummyPic from "../assets/mentor2.jpg";
+import { LoginUsers } from "../dummyData/Users";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -111,42 +111,7 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const users = [
-      {
-        email: "admin@admin.com",
-        password: "admin",
-        payload: {
-          name: "Admin",
-          email: "admin@admin.com",
-          role: "admin",
-        },
-      },
-      {
-        email: "mentor@mentor.com",
-        password: "mentor",
-        payload: {
-          name: "Maya Mentor",
-          email: "mentor@mentor.com",
-          role: "mentor",
-          phone: "9876543210",
-          experience: "5 years",
-          techStack: "React, Node.js, MongoDB",
-          profilePic: DummyPic, // can be a URL later
-        },
-      },
-      {
-        email: "student@student.com",
-        password: "student",
-        payload: {
-          name: "Sarthak Student",
-          email: "student@student.com",
-          role: "student",
-          phone: "9123456780",
-          enrolledCourses: ["React Basics", "Git Pro Max"],
-          profilePic: DummyPic,
-        },
-      },
-    ];
+    const users = LoginUsers;
 
     const matchedUser = users.find(
       (user) => user.email === form.email && user.password === form.password

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
-type OfferType = "marquee" | "card" | "modal";
+// type OfferType = "marquee" | "card" | "modal";
 
 export const useLimitedTimeOffer = () => {
   const [showOffer, setShowOffer] = useState(true);

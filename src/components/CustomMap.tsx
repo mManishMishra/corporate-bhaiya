@@ -61,7 +61,6 @@ const CustomMap = () => {
               key={idx}
               position={{ lat: state.lat, lng: state.lng }}
               title={`${state.name}, ${state.country}`}
-              animation={2} // drop animation
               onClick={() => handleMarkerClick(state)}
             />
           ))}

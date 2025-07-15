@@ -1,16 +1,22 @@
 // src/components/EditProfileForm.tsx
 import { useState, useRef, ChangeEvent } from "react";
-
-const EditProfileForm = () => {
+import { User } from "../types/User";
+interface EditProfileFormProps {
+  user: User;
+  onCancel: () => void;
+}
+const EditProfileForm: React.FC<EditProfileFormProps> = ({
+  user,
+  onCancel,
+}) => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    role: "student", // or "mentor"
-    experience: "",
-    techStack: "",
+    fullName: user.name || "",
+    email: user.email || "",
+    phone: user.mobile || "",
+    role: user.role || "student",
+    experience: user.experience || "",
+    techStack: (user.techStack || []).join(", "),
   });
-
   const [profilePic, setProfilePic] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -133,6 +139,13 @@ const EditProfileForm = () => {
         className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition"
       >
         Save Changes
+      </button>
+      <button
+        type="button"
+        onClick={onCancel}
+        className="w-full border border-orange-500 text-orange-500 font-semibold py-2 px-4 rounded-full hover:bg-orange-100 transition"
+      >
+        Cancel
       </button>
     </form>
   );
