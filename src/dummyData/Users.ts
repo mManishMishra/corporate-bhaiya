@@ -13,6 +13,7 @@ export const LoginUsers: {
       name: "Admin",
       email: "admin@admin.com",
       role: "admin",
+      token: "",
     },
   },
   {
@@ -22,6 +23,7 @@ export const LoginUsers: {
       name: "Maya Mentor",
       email: "mentor@mentor.com",
       role: "mentor",
+      token: "",
       mobile: "9876543210",
       experience: "5 years",
       techStack: ["React, Node.js, MongoDB"],
@@ -35,6 +37,7 @@ export const LoginUsers: {
       name: "Sarthak Student",
       email: "student@student.com",
       role: "student",
+      token: "",
       mobile: "9123456780",
       coursesEnrolled: ["React Basics", "Git Pro Max"],
       profilePic: DummyPic,

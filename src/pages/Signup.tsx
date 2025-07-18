@@ -1,140 +1,318 @@
-// import { motion } from "framer-motion";
-// import { useState } from "react";
-
-// const SignUp = () => {
-//   const [form, setForm] = useState({ name: "", email: "" });
-
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = (e: React.FormEvent) => {
-//     e.preventDefault();
-//     alert(
-//       `Welcome, ${form.name}! We've sent a welcome pigeon to ${form.email} 🕊️`
-//     );
-//     setForm({ name: "", email: "" }); // Reset form
-//   };
-
-//   return (
-//     <div className="min-h-[80vh] flex glow-card items-center justify-center bg-[var(--brand-bg)] px-4">
-//       <motion.div
-//         className="bg-white dark:bg-zinc-900 p-8 rounded-2xl shadow-xl max-w-md w-full"
-//         initial={{ opacity: 0, y: 40 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         transition={{ duration: 0.6 }}
-//       >
-//         <h2 className="text-2xl font-bold text-center text-orange-500 mb-6">
-//           Sign Up ✨
-//         </h2>
-//         <form onSubmit={handleSubmit} className="space-y-4">
-//           <div>
-//             <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
-//               Name
-//             </label>
-//             <input
-//               name="name"
-//               type="text"
-//               value={form.name}
-//               onChange={handleChange}
-//               placeholder="Jane Doe"
-//               className="w-full px-4 py-2 border rounded-lg dark:bg-zinc-800 dark:border-zinc-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
-//               required
-//             />
-//           </div>
-//           <div>
-//             <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">
-//               Email
-//             </label>
-//             <input
-//               name="email"
-//               type="email"
-//               value={form.email}
-//               onChange={handleChange}
-//               placeholder="jane@example.com"
-//               className="w-full px-4 py-2 border rounded-lg dark:bg-zinc-800 dark:border-zinc-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
-//               required
-//             />
-//           </div>
-//           <motion.button
-//             whileHover={{ scale: 1.05 }}
-//             whileTap={{ scale: 0.95 }}
-//             type="submit"
-//             className="w-full bg-orange-500 text-white py-2 px-4 rounded-full font-semibold hover:bg-orange-600 transition"
-//           >
-//             Sign Up
-//           </motion.button>
-//         </form>
-//       </motion.div>
-//     </div>
-//   );
-// };
-
-// export default SignUp;
-
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
+import GodHeader from "../components/GodHeader";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { login } from "../redux/slices/authSlice";
 
-const SignUp = () => {
-  const dispatch = useDispatch();
-  const handleLogin = () => {
-    console.log("Logged");
+function Signup() {
+  const [role, setRole] = useState<"student" | "mentor">("student");
+  const navigate = useNavigate();
 
-    dispatch(
-      login({ name: "Manish", email: "manish@example.com", role: "mentor" })
-    );
-    toast.success("Welcome back, legend!");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    password: "",
+    confirmPassword: "",
+    bio: "",
+    experience: "",
+    goals: "",
+    linkedin: "",
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [consentGiven, setConsentGiven] = useState(false);
+
+  const togglePassword = () => setShowPassword((prev) => !prev);
+  const toggleConfirmPassword = () => setShowConfirmPassword((prev) => !prev);
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const handleRoleChange = (newRole: "student" | "mentor") => {
+    setRole(newRole);
+  };
+
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   await fetch(endpoint, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(formData),
+  //   });
+  //   console.log("Submitted form data:", formData);
+  //   // TODO: Hook into your API here
+  // };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Passwords do not match!");
+      return;
+    }
+
+    if (!consentGiven) {
+      toast.error("Please agree to the terms and conditions.");
+      return;
+    }
+
+    // const registerEndpoint =
+    //   role === "mentor"
+    //     ? "http://127.0.0.1:8000/api/register/mentor/"
+    //     : "http://127.0.0.1:8000/api/register/student/";
+    const registerEndpointServer =
+      role === "mentor"
+        ? "http://corporatebhaiya.in/api/register/mentor/"
+        : "http://corporatebhaiya.in/api/register/student/";
+
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      mobile: formData.mobile,
+      password: formData.password,
+      bio: formData.bio,
+      experience: formData.experience,
+      goals: formData.goals,
+      linkdinUrl: formData.linkedin,
+    };
+
+    try {
+      // 📝 Register the user
+      const registerRes = await fetch(registerEndpointServer, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const registerData = await registerRes.json();
+
+      if (!registerRes.ok) {
+        throw new Error(registerData.message || "Registration failed");
+      }
+
+      toast.success("🎉 Registered successfully!");
+
+      navigate("/login");
+    } catch (err: any) {
+      toast.error(err.message || "Something went wrong");
+      console.error("❌ Error during registration/login:", err);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[var(--brand-bg)] px-4">
-      <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold mb-6 text-center text-orange-500">
-          Create Account
-        </h2>
-        <form className="space-y-5">
+    <div className="max-w-xl mx-auto mt-10 p-6 rounded-2xl shadow-xl bg-white dark:bg-gray-900 transition-all">
+      <GodHeader title="Create Account " />
+
+      <div className="flex justify-center gap-4 mb-6">
+        <button
+          onClick={() => handleRoleChange("student")}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+            role === "student"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+          }`}
+        >
+          Student
+        </button>
+        <button
+          onClick={() => handleRoleChange("mentor")}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+            role === "mentor"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
+          }`}
+        >
+          Mentor
+        </button>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Name */}
+        <div>
+          <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">
+            Full Name
+          </label>
           <input
             type="text"
-            placeholder="Full Name"
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-800"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Enter your full name"
+            required
+            className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-800"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-800"
-          />
+        </div>
+        <div>
+          <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">
+            Contact Number
+          </label>
           <input
             type="tel"
-            name="phone"
-            pattern="[0-9]{10}"
-            inputMode="numeric"
             maxLength={10}
-            placeholder="Contact Number"
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-gray-800"
+            name="mobile"
+            value={formData.mobile}
+            onChange={handleChange}
+            placeholder="Enter your mobile number"
+            required
+            className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button
-            type="submit"
-            className="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition font-semibold"
-            onSubmit={handleLogin}
+        </div>
+
+        {/* Email */}
+        <div>
+          <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Enter your email"
+            required
+            className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">
+            LinkedIn Profile
+          </label>
+          <input
+            type="url"
+            name="linkedin"
+            value={formData.linkedin}
+            onChange={handleChange}
+            placeholder="https://linkedin.com/in/your-profile"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div className="relative">
+          <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">
+            Password
+          </label>
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Enter your password"
+            required
+            className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+          />
+          <span
+            className="absolute top-[38px] right-3 cursor-pointer text-gray-600 dark:text-gray-300"
+            onClick={togglePassword}
           >
-            Sign Up
-          </button>
-        </form>
-        <p className="mt-4 text-center text-sm text-gray-500">
-          Already have an account?{" "}
-          <Link to="/login" className="text-orange-500 hover:underline">
-            Log in
-          </Link>
-        </p>
-      </div>
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </span>
+        </div>
+
+        <div className="relative">
+          <label className="block text-zinc-700 dark:text-zinc-300 mb-1">
+            Confirm Password
+          </label>
+          <input
+            type={showConfirmPassword ? "text" : "password"}
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-white pr-10"
+          />
+          <span
+            className="absolute top-[38px] right-3 cursor-pointer text-gray-600 dark:text-gray-300"
+            onClick={toggleConfirmPassword}
+          >
+            {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </span>
+        </div>
+
+        {/* Role-specific fields */}
+        {role === "mentor" ? (
+          <>
+            <div>
+              <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">
+                Bio
+              </label>
+              <textarea
+                name="bio"
+                value={formData.bio}
+                onChange={handleChange}
+                rows={3}
+                className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div>
+              <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">
+                Experience
+              </label>
+              <input
+                type="text"
+                name="experience"
+                value={formData.experience}
+                onChange={handleChange}
+                placeholder="e.g. 5+ years in Data Science"
+                className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <div>
+              {/* <label className="block mb-1 font-medium text-gray-800 dark:text-gray-200">
+                Your Goals
+              </label>
+              <textarea
+                name="goals"
+                value={formData.goals}
+                onChange={handleChange}
+                rows={3}
+                placeholder="Why are you joining this platform?"
+                className="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              /> */}
+            </div>
+          </>
+        )}
+
+        <div className="flex items-center space-x-2 mt-2">
+          <input
+            type="checkbox"
+            id="consent"
+            checked={consentGiven}
+            onChange={() => setConsentGiven(!consentGiven)}
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+          />
+          <label
+            htmlFor="consent"
+            className="text-sm text-gray-700 dark:text-gray-300"
+          >
+            I agree to the Terms and Conditions
+          </label>
+        </div>
+
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full py-3 px-6 mt-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all"
+        >
+          Register as {role.charAt(0).toUpperCase() + role.slice(1)}
+        </button>
+      </form>
     </div>
   );
-};
+}
 
-export default SignUp;
+export default Signup;

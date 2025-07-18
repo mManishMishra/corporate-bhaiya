@@ -10,6 +10,8 @@ import { ErrorPage } from "./pages/ErrorPage";
 import Login from "./pages/Login";
 import UserProfile from "./pages/Profile";
 import ContactUs from "./pages/ContactUs";
+import OurCourses from "./pages/OurCourses";
+import SignUp from "./pages/Signup";
 
 const App = () => {
   useTheme();
@@ -20,7 +22,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/courses" element={<OurCourses />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="*" element={<ErrorPage />} />

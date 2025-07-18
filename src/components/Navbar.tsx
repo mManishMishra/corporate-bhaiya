@@ -267,6 +267,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "About Us", path: "/about-us" },
+    { name: "Courses", path: "/courses" },
     { name: "Practice SQL", path: "https://corporatebhaiya.com/sql_bot" },
     {
       name: "Book Mock Interview",
@@ -439,11 +440,11 @@ const Navbar = () => {
           ))}
           <li>
             <Link
-              to="/donate"
+              to="/login"
               className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition font-semibold inline-block"
               onClick={() => setMenuOpen(false)}
             >
-              Donate
+              🚀 Login
             </Link>
           </li>
         </ul>

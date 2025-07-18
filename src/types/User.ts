@@ -21,4 +21,5 @@ export interface User {
   techStack?: string[]; // MUST be an array, not a string
   schedules?: string[];
   coursesEnrolled?: string[];
+  token: string;
 }
