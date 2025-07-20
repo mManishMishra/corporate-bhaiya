@@ -5,28 +5,37 @@ type CourseCardProps = {
   image: string;
   price: string;
   title: string;
-  startDate: string;
+  start_date: string;
   duration: string;
   students: number;
-  joinUrl: string;
+  join_url: string;
 };
 
 const CourseCard: React.FC<CourseCardProps> = ({
   image,
   price,
   title,
-  startDate,
+  start_date,
   duration,
   students,
-  joinUrl,
+  join_url,
 }) => {
+  const imgSrc = image.startsWith("http")
+    ? image
+    : new URL(image, import.meta.env.VITE_SERVER_URL).href;
+
   const handleJoin = () => {
-    window.open(joinUrl, "_blank"); // open in new tab
+    window.open(join_url, "_blank"); // open in new tab
   };
 
   return (
     <div className="bg-white dark:bg-zinc-900 shadow-md rounded-2xl overflow-hidden transition hover:shadow-xl duration-300 flex flex-col">
-      <img src={image} alt={title} className="w-full h-48 object-cover" />
+      <img
+        src={imgSrc}
+        alt={title}
+        className="w-full h-48 object-cover"
+        loading="lazy"
+      />
 
       <div className="p-4 flex flex-col flex-1 justify-between">
         <div>
@@ -38,7 +47,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
           <div className="border-t border-gray-300 dark:border-gray-700 pt-3 flex flex-col gap-2 text-sm text-gray-600 dark:text-gray-300">
             <div className="flex items-center gap-2">
               <CalendarDays className="h-4 w-4" />
-              <span>Starts: {startDate}</span>
+              <span>Starts: {start_date}</span>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="h-4 w-4" />

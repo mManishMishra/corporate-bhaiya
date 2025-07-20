@@ -291,14 +291,14 @@ const Login = () => {
       // Dispatch login with role-based payload
       dispatch(
         login({
-          name: data.user.name,
-          email: data.user.email,
-          role: data.user.is_mentor ? "mentor" : "student",
-          token: data.access,
+          name: data?.user?.name || "",
+          email: data?.user?.email || "",
+          role: data?.user?.is_mentor ? "mentor" : "student",
+          token: data?.access,
         })
       );
 
-      toast.success(`Welcome back, ${data.user.name} 👋`);
+      toast.success(`Welcome back, ${data?.user?.name} 👋`);
       navigate("/profile");
     } catch (err) {
       console.error(err);

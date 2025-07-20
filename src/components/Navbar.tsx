@@ -260,6 +260,8 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const [showSearch, setShowSearch] = useState(false);
   const { user } = useSelector((state: RootState) => state.auth);
+  // const navigate = useNavigate();
+  const loggedUser = localStorage.getItem("token");
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -268,7 +270,11 @@ const Navbar = () => {
   const navLinks = [
     { name: "About Us", path: "/about-us" },
     { name: "Courses", path: "/courses" },
-    { name: "Practice SQL", path: "https://corporatebhaiya.com/sql_bot" },
+    // Redirect to https://sql.corporatebhaiya.in/ if login else redirect to login
+    {
+      name: "Practice SQL",
+      path: loggedUser ? "https://sql.corporatebhaiya.in/" : "/login",
+    },
     {
       name: "Book Mock Interview",
       path: "https://superprofile.bio/bookings/corporate-bhaiya",
@@ -277,7 +283,7 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-[var(--brand-bg)] shadow-md transition-colors duration-500">
+    <header className="sticky top-5 z-50 bg-[var(--brand-bg)] shadow-md transition-colors duration-500">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between relative">
         <Link to="/" className="flex items-center gap-2 glow-card">
           <img

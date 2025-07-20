@@ -4,6 +4,8 @@ import { Eye, EyeOff } from "lucide-react";
 import GodHeader from "../components/GodHeader";
 import toast from "react-hot-toast";
 
+const registerUrl = `${import.meta.env.VITE_SERVER_URL}/api/register`;
+
 function Signup() {
   const [role, setRole] = useState<"student" | "mentor">("student");
   const navigate = useNavigate();
@@ -68,14 +70,17 @@ function Signup() {
     //   role === "mentor"
     //     ? "http://127.0.0.1:8000/api/register/mentor/"
     //     : "http://127.0.0.1:8000/api/register/student/";
+    // const registerEndpointServer =
+    //   role === "mentor"
+    //     ? "https://corporatebhaiya.in/api/register/mentor/"
+    //     : "https://corporatebhaiya.in/api/register/student/";
     const registerEndpointServer =
-      role === "mentor"
-        ? "http://corporatebhaiya.in/api/register/mentor/"
-        : "http://corporatebhaiya.in/api/register/student/";
+      role === "mentor" ? `${registerUrl}/mentor/` : `${registerUrl}/student/`;
 
     const payload = {
       name: formData.name,
       email: formData.email,
+      role: role,
       mobile: formData.mobile,
       password: formData.password,
       bio: formData.bio,
