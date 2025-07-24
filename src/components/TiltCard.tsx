@@ -106,6 +106,9 @@ export interface MentorData {
   linkedin: string;
   route?: string;
   buttonText?: string;
+  skills?: [];
+  courses?: [];
+  bio?: string;
 }
 interface MentorCardProps {
   mentor: MentorData;

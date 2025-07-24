@@ -1,4 +1,4 @@
-import { Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -8,7 +8,9 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold mb-4">About Us</h3>
           <p className="text-sm">
-            Some text To Provide Information Or Goal About Corporate Bhaiya
+            Welcome to the latest edition of the Corporate Bhaiya newsletter! We
+            are delighted to bring you the newest updates and valuable
+            insights from our team.
           </p>
         </div>
 
@@ -82,19 +84,35 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-orange-500">
+            <a
+              href="https://www.facebook.com/CorporateBhaiya/"
+              target="_blank"
+              className="hover:text-orange-500"
+            >
               <Facebook className="w-5 h-5" />
             </a>
-            <a href="#" className="hover:text-orange-500">
+            {/* <a href="#" className="hover:text-orange-500">
               <Twitter className="w-5 h-5" />
-            </a>
-            <a href="#" className="hover:text-orange-500">
+            </a> */}
+            <a
+              href="https://www.instagram.com/corporatebhaiya?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+              target="_blank"
+              className="hover:text-orange-500"
+            >
               <Instagram className="w-5 h-5" />
             </a>
-            <a href="#" className="hover:text-orange-500">
+            <a
+              href="https://www.linkedin.com/company/corporate-bhaiya/"
+              target="_blank"
+              className="hover:text-orange-500"
+            >
               <Linkedin className="w-5 h-5" />
             </a>
-            <a href="#" className="hover:text-orange-500">
+            <a
+              href="https://youtube.com/@corporatebhaiya?si=Uz6Rty8kJAK6iu9V"
+              target="_blank"
+              className="hover:text-orange-500"
+            >
               <Youtube className="w-5 h-5" />
             </a>
           </div>

@@ -66,21 +66,13 @@ function Signup() {
       return;
     }
 
-    // const registerEndpoint =
-    //   role === "mentor"
-    //     ? "http://127.0.0.1:8000/api/register/mentor/"
-    //     : "http://127.0.0.1:8000/api/register/student/";
-    // const registerEndpointServer =
-    //   role === "mentor"
-    //     ? "https://corporatebhaiya.in/api/register/mentor/"
-    //     : "https://corporatebhaiya.in/api/register/student/";
     const registerEndpointServer =
       role === "mentor" ? `${registerUrl}/mentor/` : `${registerUrl}/student/`;
 
     const payload = {
       name: formData.name,
       email: formData.email,
-      role: role,
+      user_role: role,
       mobile: formData.mobile,
       password: formData.password,
       bio: formData.bio,

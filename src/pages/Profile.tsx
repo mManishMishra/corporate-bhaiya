@@ -162,6 +162,7 @@ const UserProfile = () => {
         <button
           onClick={() => {
             dispatch(logout());
+            localStorage.clear();
             toast.success("Logged out 👋");
             navigate("/");
           }}

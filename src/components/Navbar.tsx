@@ -275,11 +275,12 @@ const Navbar = () => {
       name: "Practice SQL",
       path: loggedUser ? "https://sql.corporatebhaiya.in/" : "/login",
     },
-    {
-      name: "Book Mock Interview",
-      path: "https://superprofile.bio/bookings/corporate-bhaiya",
-    },
+    // {
+    //   name: "Book Mock Interview",
+    //   path: "https://superprofile.bio/bookings/corporate-bhaiya",
+    // },
     { name: "Contact Us", path: "/contact-us" },
+    { name: "Certificate", path: "/certificate" },
   ];
 
   return (

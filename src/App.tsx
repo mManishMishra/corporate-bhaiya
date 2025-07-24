@@ -12,6 +12,8 @@ import UserProfile from "./pages/Profile";
 import ContactUs from "./pages/ContactUs";
 import OurCourses from "./pages/OurCourses";
 import SignUp from "./pages/Signup";
+import MentorDetail from "./components/MentorDetails";
+import CertificatePage from "./pages/CertificatePage";
 
 const App = () => {
   useTheme();
@@ -28,6 +30,8 @@ const App = () => {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="*" element={<ErrorPage />} />
+          <Route path="/certificate" element={<CertificatePage />} />
+          <Route path="/mentor/:mentorId" element={<MentorDetail />} />
         </Routes>
         <Footer />
         <ScrollToTopButton />
