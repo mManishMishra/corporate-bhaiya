@@ -1,7 +1,7 @@
-import CourseCard from "../components/CoursesCard";
+import BotCard from "../components/BotCard";
 import { useEffect, useState } from "react";
-const coursesUrl = `${import.meta.env.VITE_SERVER_URL}/api/courses`;
-const OurCourses = () => {
+const coursesUrl = `${import.meta.env.VITE_SERVER_URL}/api/bots`;
+const PracticeWithBot = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -27,7 +27,7 @@ const OurCourses = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-zinc-950 py-12 px-4 sm:px-6 lg:px-12">
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-        🚀 Our Featured Courses
+        🚀 Practice With Our Bots
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -38,11 +38,11 @@ const OurCourses = () => {
         {!loading &&
           !error &&
           courses.map((course: any, index) => (
-            <CourseCard key={index} {...course} />
+            <BotCard key={index} {...course} />
           ))}
       </div>
     </div>
   );
 };
 
-export default OurCourses;
+export default PracticeWithBot;

@@ -1,6 +1,6 @@
 // src/components/HeroSlider.tsx
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import banner1 from "../assets/first_crousel.webp";
 import GodHeader from "./GodHeader";
@@ -14,8 +14,8 @@ const slides = [
     subHeading: "Unlock Your Career Potential",
     paragraph:
       "Upskill your skillset with corporate bhaiya and land your dream Job",
-    buttonText: "Book Slots",
-    route: "/booking",
+    buttonText: "1:1 Sessions",
+    // route: "/booking",
   },
   // {
   //   image: "",
@@ -33,7 +33,7 @@ const slides = [
 
 const Slider = () => {
   const [current, setCurrent] = useState(0);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -42,8 +42,7 @@ const Slider = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const { image, heading, subHeading, paragraph, buttonText, route } =
-    slides[current];
+  const { image, heading, subHeading, paragraph, buttonText } = slides[current];
 
   return (
     <div className="relative w-full h-[90vh] overflow-hidden">
@@ -71,8 +70,20 @@ const Slider = () => {
         <p className="text-lg md:text-xl max-w-2xl mx-auto">{subHeading}</p>
         <GodHeader title={heading} />
         <p className="text-lg md:text-xl max-w-2xl mx-auto">{paragraph}</p>
-        <button
+        {/* <button
           onClick={() => navigate(route)}
+          className="px-6 py-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition cursor-pointer"
+        >
+          {buttonText}
+        </button> */}
+
+        <button
+          onClick={() =>
+            window.open(
+              "https://superprofile.bio/bookings/corporatebhaiya-analytics",
+              "_blank"
+            )
+          }
           className="px-6 py-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition cursor-pointer"
         >
           {buttonText}

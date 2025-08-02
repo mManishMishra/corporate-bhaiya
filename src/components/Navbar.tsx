@@ -247,13 +247,14 @@
 import { Link } from "react-router-dom";
 import { Menu, X, Moon, Sun, Search } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useTheme } from "../hooks/useTheme";
 import logoSide from "../assets/corporate_logo.jpg";
 import SearchBox from "./Searchbox";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import defaultAvatar from "../assets/mentor4.jpg";
+import { isTokenValid } from "../lib/TokenExpiry";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -261,7 +262,15 @@ const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const { user } = useSelector((state: RootState) => state.auth);
   // const navigate = useNavigate();
-  const loggedUser = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
+
+  // import { useMemo } from "react";
+
+  const loggedUser = useMemo(() => {
+    return user && isTokenValid(token || "");
+  }, [user, token]);
+
+  // const loggedUser = user && isTokenValid(token || "");
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -270,16 +279,25 @@ const Navbar = () => {
   const navLinks = [
     { name: "About Us", path: "/about-us" },
     { name: "Courses", path: "/courses" },
-    // Redirect to https://sql.corporatebhaiya.in/ if login else redirect to login
     {
-      name: "Practice SQL",
-      path: loggedUser ? "https://sql.corporatebhaiya.in/" : "/login",
+      name: "Practice with Bot",
+      path: "/practice-bot",
     },
+    {
+      name: "1:1 Session",
+      path: "https://superprofile.bio/bookings/corporatebhaiya-analytics",
+    },
+    // Redirect to https://sql.corporatebhaiya.in/ if login else redirect to login
+    // {
+    //   name: "Practice SQL",
+    //   path: loggedUser ? "https://sql.corporatebhaiya.in/" : "/login",
+    // },
     // {
     //   name: "Book Mock Interview",
     //   path: "https://superprofile.bio/bookings/corporate-bhaiya",
     // },
     { name: "Contact Us", path: "/contact-us" },
+
     { name: "Certificate", path: "/certificate" },
   ];
 
@@ -313,7 +331,7 @@ const Navbar = () => {
             </button>
           </li>
 
-          {user ? (
+          {loggedUser ? (
             <li>
               <Link to="/profile" className="flex items-center gap-2 hover-fx">
                 <img

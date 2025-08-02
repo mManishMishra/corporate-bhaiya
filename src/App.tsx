@@ -14,6 +14,7 @@ import OurCourses from "./pages/OurCourses";
 import SignUp from "./pages/Signup";
 import MentorDetail from "./components/MentorDetails";
 import CertificatePage from "./pages/CertificatePage";
+import PracticeWithBot from "./pages/PracticeWithBot";
 
 const App = () => {
   useTheme();
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="*" element={<ErrorPage />} />
           <Route path="/certificate" element={<CertificatePage />} />
           <Route path="/mentor/:mentorId" element={<MentorDetail />} />
+          <Route path="/practice-bot" element={<PracticeWithBot />} />
         </Routes>
         <Footer />
         <ScrollToTopButton />
