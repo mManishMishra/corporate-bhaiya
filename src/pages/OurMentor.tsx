@@ -1,14 +1,4 @@
 import { MentorGrid } from "../components/TiltCard"; // or wherever you keep it
-// import Paras from "../assets/paras_jain1.jpg";
-// import Samyak from "../assets/samayak1.jpeg";
-// import Anas from "../assets/anas.jpg";
-// import Suraj from "../assets/suraj.jpeg";
-// import Ganesh from "../assets/ganesh_img.jpeg";
-// import Junaid from "../assets/junad.jpg";
-// import Vaibhav from "../assets/vaibhav.jpg";
-// import Adarsh from "../assets/adars_jain.jpg";
-// import Manish from "../assets/manish.jpeg";
-// import Shivam from "../assets/shivam_sing.jpeg";
 import { useEffect, useState } from "react";
 // const mentorData: MentorData[] = [
 //   {

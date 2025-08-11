@@ -32,7 +32,7 @@ const App = () => {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/certificate" element={<CertificatePage />} />
-          <Route path="/mentor/:mentorId" element={<MentorDetail />} />
+          <Route path="/mentor/:mentorSlug" element={<MentorDetail />} />
           <Route path="/practice-bot" element={<PracticeWithBot />} />
         </Routes>
         <Footer />

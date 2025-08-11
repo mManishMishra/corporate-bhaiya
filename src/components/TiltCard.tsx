@@ -98,6 +98,7 @@ export const FeatureCards = ({ cards }: FeatureCardsProps) => {
 // Adding mentor card
 
 export interface MentorData {
+  id?: number;
   name: string;
   image: string;
   role: string;
@@ -113,6 +114,13 @@ export interface MentorData {
 interface MentorCardProps {
   mentor: MentorData;
 }
+
+// Slugify helper
+const slugify = (str: string) =>
+  str
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
 
 export const MentorCard = ({ mentor }: MentorCardProps) => {
   const navigate = useNavigate();
@@ -135,6 +143,11 @@ export const MentorCard = ({ mentor }: MentorCardProps) => {
   const handleMouseLeave = () => {
     x.set(0.5);
     y.set(0.5);
+  };
+
+  const handleKnowMore = () => {
+    // Navigate using slug instead of ID
+    navigate(`/mentor/${slugify(mentor.name)}`);
   };
 
   return (
@@ -180,7 +193,8 @@ export const MentorCard = ({ mentor }: MentorCardProps) => {
           </a>
           {mentor.route && (
             <button
-              onClick={() => navigate(mentor.route!)}
+              // onClick={() => navigate(mentor.route!)}
+              onClick={handleKnowMore}
               className="text-sm text-orange-500 font-semibold hover:underline"
             >
               {mentor.buttonText || "Know More"}
