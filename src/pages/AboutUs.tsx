@@ -39,7 +39,7 @@
 // export default AboutUs;
 
 import { motion } from "framer-motion";
-
+import { useNavigate } from "react-router-dom";
 const features = [
   {
     title: "Skilled Instructors",
@@ -89,6 +89,7 @@ const testimonials = [
 ];
 
 export default function AboutUs() {
+  const navigate = useNavigate();
   return (
     <div className="">
       <section className="bg-[var(--brand-bg)]  py-20 px-6 text-center">
@@ -172,7 +173,9 @@ export default function AboutUs() {
           Whether you're a student aiming for your first offer or a parent
           looking for real career support—your journey starts here.
         </p>
-        <button className="bg-black hover:bg-zinc-900 text-white font-semibold px-6 py-3 rounded-full transition">
+        <button 
+        onClick={() => navigate("/courses")}
+        className="bg-black hover:bg-zinc-900 text-white font-semibold px-6 py-3 rounded-full transition">
           Explore Courses
         </button>
       </section>

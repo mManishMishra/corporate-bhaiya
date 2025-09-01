@@ -14,7 +14,7 @@ const slides = [
     subHeading: "Unlock Your Career Potential",
     paragraph:
       "Upskill your skillset with corporate bhaiya and land your dream Job",
-    buttonText: "1:1 Sessions",
+    buttonText: "1:1 Session",
     // route: "/booking",
   },
   // {

@@ -8,8 +8,7 @@ const OfferMarquee = () => {
         transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
         className="whitespace-nowrap text-center text-sm sm:text-base font-semibold text-black"
       >
-        🚨 Limited Time Offer! Get Mentorship + Bonuses! 🎁 Only for early
-        birds! 🕒 Claim Now → corporatebhaiya.com/offer
+         We are open for collaborations! Partner with us like Ediglobe to sell courses and services. Reach out us at <a href="mailto:contact@corporatebhaiya.com">contact@corporatebhaiya.com</a> or <a href="phone:+919289496871">+91 9289496871</a> for more details.
       </motion.div>
     </div>
   );

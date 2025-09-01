@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { Search } from "lucide-react";
 
 type Certificate = {
+  name:string;
   registration_number: string;
   certificate_name: string;
   issuing_organization: string;
@@ -105,6 +106,9 @@ const CertificateVerification = () => {
 
       {certificate && (
         <div className="mt-8 p-6 border border-gray-300 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-zinc-800 space-y-4">
+          <p>
+            <strong>Student Name:</strong> {certificate.name}
+          </p>
           <p>
             <strong>Registration No:</strong> {certificate.registration_number}
           </p>

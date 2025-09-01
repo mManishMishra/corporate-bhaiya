@@ -27,7 +27,7 @@ const PracticeWithBot = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-zinc-950 py-12 px-4 sm:px-6 lg:px-12">
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-        🚀 Practice With Our Bots
+        🚀 Practice Coding With Our AI Bots
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

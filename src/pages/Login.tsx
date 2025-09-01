@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/slices/authSlice";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [form, setForm] = useState({ email: "", password: "" });
+
   const loginUrl = `${import.meta.env.VITE_SERVER_URL}/api/login/`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,22 +35,26 @@ const Login = () => {
 
       const data = await res.json();
 
-      // store tokens
-      localStorage.setItem("token", data.access);
-      localStorage.setItem("refresh", data.refresh);
+     localStorage.setItem("token", data.access);
 
-      // Dispatch login with role-based payload
-      dispatch(
-        login({
-          name: data?.user?.name || "",
-          email: data?.user?.email || "",
-          role: data?.user?.is_mentor ? "mentor" : "student",
-          token: data?.access,
-        })
-      );
+// Save refresh token separately if you plan to implement refresh later
+localStorage.setItem("refresh", data.refresh);
 
-      toast.success(`Welcome back, ${data?.user?.name} 👋`);
-      navigate("/profile");
+const user = {
+  id: 1,
+  name: "Test User",
+  email: "admin@gmail.com",
+  role: "student" as const,
+};
+
+dispatch(login({ user, token: data.access }));
+
+      toast.success(`Welcome back, ${user?.name} 👋`);
+
+      // 👇 decide where to send the user
+      const from = (location.state as any)?.from || "/profile";
+      navigate(from, { replace: true });
+
     } catch (err) {
       console.error(err);
       toast.error("Invalid email or password 😶");

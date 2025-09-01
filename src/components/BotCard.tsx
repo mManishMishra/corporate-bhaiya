@@ -1,41 +1,56 @@
-import React, { useMemo } from "react";
-// import { CalendarDays, Users, Clock } from "lucide-react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { isTokenValid } from "../lib/TokenExpiry";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation } from "react-router-dom";
+
+
 
 type BotCardProps = {
   image: string;
   title: string;
-  join_url: string;
+  join_url?: string;
+  button_text?: string;
 };
 
-const BotCard: React.FC<BotCardProps> = ({ image, title, join_url }) => {
+const BotCard: React.FC<BotCardProps> = ({ image, title, join_url, button_text }) => {
   const { user } = useSelector((state: RootState) => state.auth);
-  const token = localStorage.getItem("token");
+  const [loggedUser, setLoggedUser] = useState(false);
   const navigate = useNavigate();
-
-  const loggedUser = useMemo(() => {
-    return user && isTokenValid(token || "");
-  }, [user, token]);
+  const location = useLocation();  
 
   const imgSrc = image.startsWith("http")
     ? image
     : new URL(image, import.meta.env.VITE_SERVER_URL).href;
 
-  const handleJoin = () => {
-    if (loggedUser) {
-      window.open(
-        join_url
-          ? join_url
-          : "https://superprofile.bio/bookings/corporatebhaiya-analytics",
-        "_blank"
-      );
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (user && token && isTokenValid(token)) {
+      setLoggedUser(true);
     } else {
-      navigate("/login");
+      setLoggedUser(false);
     }
-  };
+  }, [user]);
+
+  // const handleJoin = () => {
+  //   if (loggedUser) {
+  //     window.open(
+  //       join_url || "https://sql.corporatebhaiya.in/",
+  //       "_blank"
+  //     );
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // };
+
+  const handleJoin = () => {
+  if (loggedUser) {
+    window.open(join_url || "https://sql.corporatebhaiya.in/", "_blank");
+  } else {
+    navigate("/login", { state: { from: location.pathname } }); 
+  }
+};
+
 
   return (
     <div className="bg-white dark:bg-zinc-900 shadow-md rounded-2xl overflow-hidden transition hover:shadow-xl duration-300 flex flex-col">
@@ -57,7 +72,7 @@ const BotCard: React.FC<BotCardProps> = ({ image, title, join_url }) => {
           onClick={handleJoin}
           className="mt-6 w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-2 rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 text-sm shadow-md hover:shadow-lg"
         >
-          🚀 Join Now
+          {button_text || "Practice Now"}
         </button>
       </div>
     </div>
